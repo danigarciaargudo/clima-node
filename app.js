@@ -1,32 +1,8 @@
 const lugar = require('./lugar/lugar');
 const clima = require('./clima/clima');
-
-const argv = require('yargs').options({
-    direccion: {
-        alias: 'd',
-        desc: 'Nombre de la ciudad para obtener el clima',
-        demand: true
-    }
-}).argv;
+const yargs = require('./yargs/yargs').argv;
 
 
-// OPCIÓN A
-
-// lugar.getLugar(argv.direccion)
-//     .then(resp => {
-//         console.log('FN getLugar', resp);
-//         clima.getClima(resp.latitud, resp.longitud)
-//             .then(resp => {
-//                 console.log('Tª', resp.main.temp);
-//             })
-//             .catch(e => {
-//                 console.log(e);
-//             })
-//     })
-//     .catch(e => console.log(e));
-
-
-// OPCIÓN MEJORADA
 
 let getInfo = async(direccion) => {
     try {
@@ -40,6 +16,6 @@ let getInfo = async(direccion) => {
 
 }
 
-getInfo(argv.direccion)
+getInfo(yargs.direccion)
     .then(mensaje => console.log(mensaje))
     .catch(e => console.log(e));
